@@ -1,0 +1,54 @@
+CREATE DATABASE `db_proyecto`
+
+CREATE TABLE `users` (
+  `id_usr` integer PRIMARY KEY AUTO_INCREMENT,
+  `name_usr` varchar(100) NOT NULL,
+  `login_usr` varchar(100) NOT NULL,
+  `email_usr` varchar(50) NOT NULL,
+  `password_usr` varchar(200) NOT NULL,
+  `role_usr` varchar(50) DEFAULT (user),
+  `id_role` varchar(50) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `roles` (
+  `id_rol` integer PRIMARY KEY AUTO_INCREMENT,
+  `name_rol` VARCHAR(50) DEFAULT 'Usuario',
+  `id_usr` integer NOT NULL
+);
+
+
+-- Eliminar una tabla
+DROP TABLE usuario;
+
+ALTER TABLE users
+add COLUMN rol int NOT NULL
+after password_usr
+--After despues before antes
+
+ALTER TABLE users
+add COLUMN id_rol int NOT NULL
+AFTER role_usr
+
+ALTER TABLE users
+drop COLUMN role_id
+
+ALTER TABLE usuario
+MODIFY COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+ALTER TABLE usuario
+MODIFY COLUMN id int AUTO_INCREMENT
+
+INSERT INTO usuario (id, nombre, email, rol)
+(1, "Ewil Ascanio", "ewil@gmail.com", "administrador");
+
+INSERT INTO usuario (nombre_usr, password_usr, email_usr, rol_usr)
+VALUES ("Ewil", 1234, "ewil@gmail.com", "administardor")
+
+ALTER TABLE users
+ADD CONSTRAINT FK_UserRol
+FOREIGN KEY (role_id) REFERENCES users(id_rol);
+
+INSERT INTO roles(name_rol) VALUES('Administrador')
+INSERT INTO roles(name_rol) VALUES('Usuario') 
+ 
