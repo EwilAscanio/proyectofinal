@@ -10,11 +10,7 @@ const ButtonDelete = async ({ user_id }) => {
 
   //Creo una funcion asincrona para manejar la eliminacion del usuario.
   const handleDelete = async () => {
-    // if (session.user.id === userId) {
-    //   Swal.fire("Error", "No puedes eliminar tu propia cuenta.", "error");
-    //   return;
-    // }
-
+    //Utilizo SweetAlert2 para mostrar una alerta de confirmacion antes de eliminar el usuario.
     const result = await Swal.fire({
       title: "¿Estás seguro?",
       text: "No podrás revertir esta acción",

@@ -1,5 +1,3 @@
-"use client";
-import React from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
@@ -10,10 +8,7 @@ const ButtonUpdate = async ({ user_id }) => {
 
   //Creo una funcion asincrona para manejar la eliminacion del usuario.
   const handleUpdate = async () => {
-    // if (session.user.id === userId) {
-    //   Swal.fire("Error", "No puedes eliminar tu propia cuenta.", "error");
-    //   return;
-    // }
+    //Utilizo SweetAlert2 para mostrar una alerta de confirmacion antes de eliminar el usuario.
 
     const result = await Swal.fire({
       title: "¿Estás seguro?",
@@ -28,7 +23,7 @@ const ButtonUpdate = async ({ user_id }) => {
     if (result.isConfirmed) {
       try {
         const resp = await axios.put(
-          `http://localhost:3000/api/usersdelete/${user_id}`
+          `http://localhost:3000/api/update/${user_id}`
         );
         if (resp.status === 200) {
           Swal.fire({

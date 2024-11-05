@@ -18,7 +18,10 @@ const UpdatePage = async () => {
   return (
     <div className="w-full flex justify-center items-center flex-wrap gap-8">
       {users.map((user) => (
-        <Link href={`/auth/dashboard/updateusers/${user.id_usr}`}>
+        <Link
+          key={user.id_usr}
+          href={`/auth/dashboard/updateusers/${user.id_usr}`}
+        >
           <section className="flex font-medium items-center justify-center hover:bg-blue-100 hover:rounded-2xl ">
             <section className="w-80 mx-auto rounded-2xl px-8 py-6 shadow-lg">
               <div className="flex items-center justify-between"></div>

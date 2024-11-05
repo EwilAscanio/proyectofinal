@@ -65,11 +65,47 @@ export const DELETE = async (req, { params }) => {
   }
 };
 
+export const PUT = async (req, { params }) => {
+  console.log("PARAMS PUT:", params);
+  console.log("REQ PUT:", req);
+
+  try {
+    /*const result = await conn.query(
+      `
+    UPDATE users
+    SET name_usr = ${name_usr}, login_usr = ${login_usr}, email_usr = ${email_usr}, password_usr = ${password_usr}, id_rol = ${id_rol}
+    WHERE id_usr = ${params.id}
+  `
+    );
+    if (result.affectedRows === 0) {
+      return NextResponse.json(
+        {
+          message: "Usuario no encontrado",
+        },
+        {
+          status: 404,
+        }
+      );
+    }*/
+
+    return NextResponse.json("Usuario eliminado exitosamente");
+  } catch (error) {
+    return NextResponse(
+      {
+        message: error.message,
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+};
+
 // export const PUT = async (req, { params }) => {
 //   console.log("Params PUT:", params);
 
 //   const result = await conn.query(
-//     `INSERT INTO users SET(name_usr, login_usr, email_usr, password_usr, id_rol) values() WHERE id_usr = "${params.id}"`
+// `INSERT INTO users SET(name_usr, login_usr, email_usr, password_usr, id_rol) values() WHERE id_usr = "${params.id}"`
 //   );
 //   try {
 //     if (result.affectedRows === 0) {
@@ -95,11 +131,11 @@ export const DELETE = async (req, { params }) => {
 //     );
 //   }
 // };
-
+/*
 export const PUT = async (req, res) => {
   console.log("Query PUT REQ:", req);
   console.log("Query PUT RES:", res);
-  console.log("Params PUT:", params);
+  // console.log("Params PUT:", params);
 
   const userId = req.query.id_usr; // Obtén el ID del usuario de la consulta de la URL
 
@@ -125,7 +161,7 @@ export const PUT = async (req, res) => {
   // Construir la consulta SQL con prepared statements para prevenir inyecciones
   const query = `
     UPDATE users
-    SET name_usr = ?, login_usr = ?, email_usr = ?, password_usr = ?, id_rol = ?
+    SET name_usr = ${name_usr}, login_usr = ?, email_usr = ?, password_usr = ?, id_rol = ?
     WHERE id_usr = ?
   `;
 
@@ -165,4 +201,4 @@ export const PUT = async (req, res) => {
       }
     );
   }
-};
+};*/

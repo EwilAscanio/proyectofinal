@@ -34,8 +34,8 @@ export default function Layout({ children }) {
           </div>
 
           {/* Inicio del Children */}
-          <div className="bg-slate-50 w-[90%] h-[95%]">
-            <main>{children}</main>
+          <div className="relative bg-slate-50 w-[90%] h-[95%] overflow-hidden">
+            <main className="absolute w-full">{children}</main>
           </div>
         </div>
       </div>
