@@ -1,7 +1,7 @@
 import Sidebar from "@/components/Sidebar";
 import NavRight from "@/components/NavRight";
 import Image from "next/image";
-import logo from "@/images/logo.png";
+import logo from "@/images/Logo.png";
 
 export default function Layout({ children }) {
   return (
