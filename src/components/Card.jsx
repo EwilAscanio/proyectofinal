@@ -1,24 +1,11 @@
 import Imagen from "next/image";
 import Link from "next/link";
 
-const CardNew = ({ image, title, content }) => {
+const Card = ({ image, title, content }) => {
   return (
     <>
-      {/* <div className="bg-white p-6 rounded-lg shadow-md flex justify-center items-center flex-col w-full">
-        <Imagen
-          src={image}
-          height="800"
-          width="800"
-          className="max-w-full object-cover rounded-lg"
-        ></Imagen>
-        <h3 className="text-xl font-semibold text-blue-600 mb-3 mt-2">
-          {title}
-        </h3>
-        <p className="text-gray-600 text-center">{content}</p>
-      </div> */}
-
       <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-blue-200">
-        <div className="hover:hidden">
+        <div className="hover:transition-all">
           <Link href="/">
             <Imagen className="rounded-t-lg " src={image} alt="" />
           </Link>
@@ -26,14 +13,14 @@ const CardNew = ({ image, title, content }) => {
 
         <div className="p-5">
           <Link href="#">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
               {title}
             </h5>
           </Link>
           <p className="mb-3 font-normal text-gray-700 ">{content}</p>
           <Link
             href="#"
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600"
           >
             Mas Informacion
             <svg
@@ -58,4 +45,4 @@ const CardNew = ({ image, title, content }) => {
   );
 };
 
-export default CardNew;
+export default Card;

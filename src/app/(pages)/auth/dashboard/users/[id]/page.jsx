@@ -5,17 +5,9 @@ import ImagenProfile from "@/images/8380015.jpg";
 
 import ButtonDelete from "@/components/ButtonDelete";
 
-// const loadUser = async (email) => {
-//   console.log("USERID new", email);
-//   const { data } = await axios.get(`http://localhost:3000/api/users/${email}`);
-
-//   console.log("DATA new", data);
-//   return data;
-// };
-
 const loadUser = async (user_id) => {
   const { data } = await axios.get(
-    `http://localhost:3000/api/usersdelete/${user_id}`
+    `http://localhost:3000/api/delete/${user_id}`
   );
   console.log("Data recibida de funcion loadUser NEwWS:", data);
   return data;

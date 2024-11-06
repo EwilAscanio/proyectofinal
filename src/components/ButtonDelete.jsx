@@ -24,7 +24,7 @@ const ButtonDelete = async ({ user_id }) => {
     if (result.isConfirmed) {
       try {
         const resp = await axios.delete(
-          `http://localhost:3000/api/usersdelete/${user_id}`
+          `http://localhost:3000/api/delete/${user_id}`
         );
         if (resp.status === 200) {
           Swal.fire({

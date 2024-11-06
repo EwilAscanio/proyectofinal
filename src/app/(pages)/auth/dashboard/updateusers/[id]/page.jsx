@@ -54,7 +54,7 @@ const UpdateUsers = ({ params }) => {
         icon: "success",
         confirmButtonColor: "#3085d6",
       });
-      router.push("/login");
+      router.push("/dashboard");
       router.refresh();
     } else if (res.status === 400) {
       // Error de validación del servidor

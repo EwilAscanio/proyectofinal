@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import ImageHome from "@/images/imagen1.jpg";
+import Logo from "@/images/logo3.jpeg";
 import Footer from "@/components/Footer";
+import NavbarTransparent from "@/components/NavbarTransparent";
 
 const HomePage = () => {
   return (
@@ -22,49 +24,8 @@ const HomePage = () => {
       {/* Contenido de la página */}
       <div className="flex flex-col min-h-screen">
         {/* Navbar */}
-        <nav className="relative">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <Link href="/" className="text-white text-2xl font-bold">
-                Logo
-              </Link>
-              <ul className="flex space-x-4">
-                <li>
-                  <Link
-                    href="/"
-                    className="text-white hover:text-blue-500 hover:underline cursor-pointer"
-                  >
-                    Inicio
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about"
-                    className="text-white hover:text-blue-500 hover:underline cursor-pointer"
-                  >
-                    Acerca de
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/services"
-                    className="text-white hover:text-blue-500 hover:underline cursor-pointer"
-                  >
-                    Servicios
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact"
-                    className="text-white hover:text-blue-500 hover:underline cursor-pointer"
-                  >
-                    Contacto
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+
+        <NavbarTransparent />
 
         {/* Contenido principal */}
         <main className="flex-grow flex flex-col items-center justify-center text-white text-center px-4">

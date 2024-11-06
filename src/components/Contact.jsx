@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
+import Fondo from "@/images/fondo.jpg";
+import Image from "next/image";
 
 const Contact = () => {
   const {
@@ -21,10 +23,10 @@ const Contact = () => {
     reset();
   };
   return (
-    <>
+    <div>
       {/* Contenido principal */}
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-blue-800 mb-8 text-center">
+        <h1 className="text-4xl font-bold text-gray-700 mb-8 text-center">
           Contáctanos
         </h1>
 
@@ -33,11 +35,11 @@ const Contact = () => {
           <div className="md:w-2/3">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+              className="shadow-md rounded px-8 pt-6 pb-8 mb-4 backdrop:blur-3xl backdrop:brightness-50"
             >
               <div className="mb-4">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-700 text-lg font-bold mb-2"
                   htmlFor="name"
                 >
                   Nombre
@@ -57,7 +59,7 @@ const Contact = () => {
               </div>
               <div className="mb-4">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-700 text-lg font-bold mb-2"
                   htmlFor="email"
                 >
                   Email
@@ -83,7 +85,7 @@ const Contact = () => {
               </div>
               <div className="mb-6">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-700 text-lg font-bold mb-2"
                   htmlFor="message"
                 >
                   Mensaje
@@ -126,15 +128,15 @@ const Contact = () => {
           </div>
 
           {/* Información de contacto */}
-          <div className="md:w-1/3">
+          <div className="md:w-1/3 mt-20">
             <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-              <h2 className="text-2xl font-bold text-blue-800 mb-4">
+              <h2 className="text-2xl font-bold text-gray-700 mb-4">
                 Información de Contacto
               </h2>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <MapPin className="text-blue-600 mr-2" />
-                  <p>123 Calle Principal, Ciudad, País</p>
+                  <p>123 Calle Principal, Valencia Edo Carabobo</p>
                 </div>
                 <div className="flex items-center">
                   <Phone className="text-blue-600 mr-2" />
@@ -149,7 +151,7 @@ const Contact = () => {
           </div>
         </div>
       </main>
-    </>
+    </div>
   );
 };
 

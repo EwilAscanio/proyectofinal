@@ -6,8 +6,8 @@ import ImagenCard3 from "@/images/imagen4.jpg";
 const page = () => {
   return (
     <>
-      <div className="flex items-center justify-center flex-col ">
-        <h2 className="text-3xl font-semibold text-blue-700 mb-6 text-center [text-shadow:_0_2px_4px_rgb(99_102_241_/_0.8)]">
+      <div className="mt-12 flex items-center justify-center flex-col ">
+        <h2 className="text-3xl font-semibold text-gray-700 mb-6 text-center [text-shadow:_0_2px_4px_rgb(99_102_241_/_0.8)]">
           Nuestros Servicios Principales
         </h2>
 

@@ -5,6 +5,7 @@ import { LuUser, LuLock, LuArrowRight } from "react-icons/lu";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [error, setError] = useState(null);
@@ -31,15 +32,21 @@ const Login = () => {
     console.log(resp);
 
     if (resp.error) {
+      Swal.fire({
+        title: "Credenciales Incorrectas",
+        text: "Por Favor Verifique.",
+        icon: "warning",
+        confirmButtonColor: "#d33",
+      });
       setError(resp.error);
     } else {
-      router.push("/auth/dashboard");
+      router.push("http://localhost:3000/auth/dashboard");
       router.refresh();
     }
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center p-4">
+    <div className="mt-20 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800">Bienvenido</h1>

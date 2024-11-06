@@ -1,7 +1,7 @@
 import Sidebar from "@/components/Sidebar";
 import NavRight from "@/components/NavRight";
 import Image from "next/image";
-import logo from "@/images/logo.jpg";
+import logo from "@/images/logo.png";
 
 export default function Layout({ children }) {
   return (
@@ -11,7 +11,12 @@ export default function Layout({ children }) {
         {/* Inicio del Grid Fila 1 */}
         <div className="">
           <div className="flex items-center justify-center h-[100%]">
-            <Image src={logo} width={300} height={600}></Image>
+            <Image
+              src={logo}
+              width={150}
+              height={300}
+              className=" mt-6 object-contain"
+            ></Image>
           </div>
         </div>
         {/* Inicio de la Fila numero 2 */}
@@ -30,7 +35,7 @@ export default function Layout({ children }) {
         {/* Inicio de la fila numero 4 */}
         <div className="col-span-2 row-span-6 row-start-2 bg-gray-300 flex flex-col items-center justify-center">
           <div className="h-14 w-full flex items-center ml-7">
-            <h2 className=" font-bold text-lg"> Titulo del menu</h2>
+            <h2 className=" font-bold text-lg"> </h2>
           </div>
 
           {/* Inicio del Children */}

@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
+import Logo from "@/images/logo.png";
 
 const Navbar2 = () => {
   const [isClick, setisClick] = useState(false);
@@ -13,7 +15,13 @@ const Navbar2 = () => {
       <nav className="absolute top-0 left-0 right-0 z-20 bg-blue-700 min-h-20 ">
         <div className="container mx-auto px-4 py-4 justify-between flex">
           <Link href="/" className="text-white text-2xl font-bold">
-            Logo
+            <Image
+              src={Logo}
+              alt="Logo"
+              width={150}
+              height={150}
+              className="rounded-full shadow-2xl"
+            />
           </Link>
           <div className="hidden md:block justify-between">
             <div className="flex items-center justify-between">

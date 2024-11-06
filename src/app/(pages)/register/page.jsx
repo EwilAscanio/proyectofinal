@@ -23,7 +23,10 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    const res = await axios.post("/api/registeruser", data);
+    const res = await axios.post(
+      "http://localhost:3000/api/registeruser",
+      data
+    );
 
     console.log(res);
 
@@ -34,7 +37,7 @@ const Register = () => {
         icon: "success",
         confirmButtonColor: "#3085d6",
       });
-      router.push("/login");
+      router.push("http://localhost:3000/login");
       router.refresh();
     } else if (res.status === 400) {
       // Error de validación del servidor
@@ -53,7 +56,7 @@ const Register = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center p-4">
+    <div className="mt-20 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800">
