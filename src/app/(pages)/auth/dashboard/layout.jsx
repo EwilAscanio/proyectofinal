@@ -1,7 +1,7 @@
 import Sidebar from "@/components/Sidebar";
 import NavRight from "@/components/NavRight";
 import Image from "next/image";
-import logo from "@/images/Logo.png";
+import Logo from "@/images/Logo.png";
 
 export default function Layout({ children }) {
   return (
@@ -12,7 +12,7 @@ export default function Layout({ children }) {
         <div className="">
           <div className="flex items-center justify-center h-[100%]">
             <Image
-              src={logo}
+              src={Logo}
               width={150}
               height={300}
               className=" mt-6 object-contain"
