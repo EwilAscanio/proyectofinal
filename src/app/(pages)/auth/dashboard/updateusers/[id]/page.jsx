@@ -54,7 +54,7 @@ const UpdateUsers = ({ params }) => {
         icon: "success",
         confirmButtonColor: "#3085d6",
       });
-      router.push("/dashboard");
+      router.push("/auth/dashboard");
       router.refresh();
     } else if (res.status === 400) {
       // Error de validación del servidor
@@ -74,17 +74,15 @@ const UpdateUsers = ({ params }) => {
   });
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/api/usersdelete/${params.id}`)
-      .then((res) => {
-        setUser({
-          name_usr: res.data.name_usr,
-          login_usr: res.data.login_usr,
-          email_usr: res.data.email_usr,
-          password_usr: res.data.password_usr,
-          id_rol: res.data.id_rol,
-        });
+    axios.get(`http://localhost:3000/api/update/${params.id}`).then((res) => {
+      setUser({
+        name_usr: res.data.name_usr,
+        login_usr: res.data.login_usr,
+        email_usr: res.data.email_usr,
+        password_usr: res.data.password_usr,
+        id_rol: res.data.id_rol,
       });
+    });
   }, []);
 
   return (

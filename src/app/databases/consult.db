@@ -7,15 +7,60 @@ CREATE TABLE `users` (
   `email_usr` varchar(50) NOT NULL,
   `password_usr` varchar(200) NOT NULL,
   `role_usr` varchar(50) DEFAULT (user),
-  `id_role` varchar(50) NOT NULL,
+  `id_rol` varchar(50) NOT NULL,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `roles` (
   `id_rol` integer PRIMARY KEY AUTO_INCREMENT,
   `name_rol` VARCHAR(50) DEFAULT 'Usuario',
-  `id_usr` integer NOT NULL
 );
+
+CREATE TABLE `animal` (
+  `codigo_ani` integer PRIMARY KEY unique,
+  `nombre_ani` varchar(100) NOT NULL,
+  `chip_ani` integer(50) NOT NULL,
+  `id_gru` integer NOT NULL,
+  `id_fam` integer NOT NULL,
+  `sexo_ani` varchar(50) NOT NULL,
+  `fechaPalpacion_ani` date,
+  `tiempoGestacion_ani` integer NOT NULL DEFAULT 0,
+  `peso_ani` integer(50) NOT NULL DEFAULT 0,
+  `arete_ani` varchar(50) NOT NULL,
+  `fechaNacimiento_ani` date,
+  `fechaVacunacion_ani` date,
+  `status_ani` varchar(50),
+  `precio_ani` decimal DEFAULT 0,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `grupo` (
+  `id_gru` integer PRIMARY KEY AUTO_INCREMENT,
+  `name_gru` varchar(50) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+INSERT INTO grupo(name_gru) VALUES('Bobinos')
+INSERT INTO grupo(name_gru) VALUES('Becerros')
+INSERT INTO grupo(name_gru) VALUES('Caballos')
+
+ALTER TABLE animal
+ADD CONSTRAINT `FK_AnimalGrupo`
+FOREIGN KEY (`id_gru`) REFERENCES grupo(`id_gru`);
+
+CREATE TABLE `familia` (
+  `id_fam` integer PRIMARY KEY AUTO_INCREMENT,
+  `name_fam` varchar(50) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE animal
+ADD CONSTRAINT `FK_AnimalFamilia`
+FOREIGN KEY (`id_fam`) REFERENCES familia(`id_fam`);
+
+
+
+INSERT INTO familia(name_fam) VALUES('Toros')
+INSERT INTO familia(name_fam) VALUES('Vacas')
 
 
 -- Eliminar una tabla

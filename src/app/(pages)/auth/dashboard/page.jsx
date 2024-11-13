@@ -1,7 +1,68 @@
-import Imagen from "next/image";
-import Link from "next/link";
+"use client";
+
+import { useEffect, useRef } from "react";
+import { Chart } from "chart.js/auto";
 import { FaUsers, FaFileInvoiceDollar } from "react-icons/fa";
 import { LuMilk } from "react-icons/lu";
+
+const data = {
+  labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"],
+  datasets: [
+    {
+      label: "Animales",
+      data: [40, 45, 50, 55, 60, 65, 70],
+      borderColor: "rgb(75, 192, 192)",
+      backgroundColor: "rgba(59, 130, 246)",
+      fill: true,
+    },
+    {
+      label: "Litros de Leche",
+      data: [10, 15, 20, 25, 30, 35, 40],
+      borderColor: "rgb(54, 162, 235)",
+      backgroundColor: "rgba(76, 175, 80)",
+      fill: true,
+    },
+    {
+      label: "Inventario ($)",
+      data: [89, 91, 92, 93, 95, 96, 98],
+      borderColor: "rgb(255, 99, 132)",
+      backgroundColor: "rgb(244, 67, 54)",
+      fill: true,
+    },
+  ],
+};
+
+const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Estadísticas de Ganadería",
+    },
+  },
+};
+
+const ChartComponent = () => {
+  const chartRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = chartRef.current.getContext("2d");
+    const myChart = new Chart(ctx, {
+      type: "bar", // Tipo de gráfico
+      data,
+      options,
+    });
+
+    return () => {
+      myChart.destroy(); // Limpiar el gráfico cuando el componente se desmonte
+    };
+  }, []);
+
+  return <canvas ref={chartRef}></canvas>;
+};
 
 const page = () => {
   return (
@@ -55,7 +116,9 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div></div>
+      <div className="mt-10 p-4">
+        <ChartComponent />
+      </div>
     </div>
   );
 };

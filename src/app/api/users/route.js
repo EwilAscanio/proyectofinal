@@ -2,11 +2,11 @@ import { conn } from "@/libs/mariadb";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
-  // Comentario: Realizacion de la consulta a la base de datos
-  //para traer todos los usuarios registrados.
-  //Se utiliza un try catch para evaluar si la solicitud fue realizada
-  //con exito permite la consulta a la base de datos de los contrario da un error con status 500.
-
+  /* Comentario: Realizacion de la consulta a la base de datos
+  para traer todos los usuarios registrados.
+  Se utiliza un try catch para evaluar si la solicitud fue realizada
+  con exito permite la consulta a la base de datos de los contrario da un error con status 500.
+*/
   try {
     const result = await conn.query("SELECT * FROM users");
 

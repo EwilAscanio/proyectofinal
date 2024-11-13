@@ -36,7 +36,7 @@ const Sidebar = async () => {
         {user_rol.name_rol == "Administrador" ? (
           <>
             <Button
-              url={"/dashboard"}
+              url={"/auth/dashboard"}
               content="Dashboard"
               icono={<MdDashboardCustomize />}
             />
@@ -74,18 +74,22 @@ const Sidebar = async () => {
         )}
       </div>
 
-      {/* <div className="flex flex-col gap-3 items-center">
+      <div className="flex flex-col gap-3 items-center">
         <h2 className="mt-4 font-bold underline text-blue-800 drop-shadow-lg text-lg">
-        Procesos
+          Procesos
         </h2>
-        <Button url={"/"} content="Ficha Animal" icono={<FaHorseHead />} />
+        <Button
+          url={"/auth/dashboard/animal"}
+          content="Ficha Animal"
+          icono={<FaHorseHead />}
+        />
         <Button url={""} content="Vacunacion" icono={<FaBriefcaseMedical />} />
         <Button url={""} content="Pesaje" icono={<FaWeightScale />} />
         <Button url={""} content="Palpacion" icono={<FaHeart />} />
         <Button url={""} content="Nacimientos" icono={<FaCow />} />
         <Button url={""} content="Produccion" icono={<FaPercent />} />
         <Button url={""} content="Ventas" icono={<FaChartLine />} />
-      </div> */}
+      </div>
     </>
   );
 };
