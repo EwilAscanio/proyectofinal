@@ -22,44 +22,36 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  // Función para manejar el envío del formulario
   const onSubmit = handleSubmit(async (data) => {
-    try {
-      const res = await axios.post(
-        "http://localhost:3000/api/registeruser",
-        data
-      );
+    const res = await axios.post(
+      "http://localhost:3000/api/registeruser",
+      data
+    );
 
-      console.log(res);
+    console.log(res);
 
-      if (res.status === 200) {
-        Swal.fire({
-          title: "Registrar Usuario",
-          text: "El usuario ha sido registrado exitosamente.",
-          icon: "success",
-          confirmButtonColor: "#3085d6",
-        });
-        router.push("/login");
-      } else if (res.status === 400) {
-        // Error de validación del servidor
-        alert("El usuario ya está registrado. Por favor, verifica los datos.");
-      } else if (res.status === 500) {
-        // Error interno del servidor
-        alert("Ocurrió un error en el servidor. Intenta nuevamente más tarde.");
-      } else {
-        // Otro error
-        alert(
-          "Ocurrió un error inesperado. Por favor, contacta al administrador."
-        );
-      }
-    } catch (error) {
-      console.error(error);
+    if (res.status == 200) {
       Swal.fire({
-        title: "Error",
-        text: "Ocurrio un Error en la solicitud.",
-        icon: "error",
-        confirmButtonColor: "#d33",
+        title: "Registrar Usuario",
+        text: "El usuario ha sido registrado exitosamente.",
+        icon: "success",
+        confirmButtonColor: "#3085d6",
       });
+      router.push("http://localhost:3000/login");
+      router.refresh();
+    } else if (res.status === 400) {
+      // Error de validación del servidor
+      alert(
+        "Los datos ingresados no son válidos. Por favor, verifica los campos."
+      );
+    } else if (res.status === 500) {
+      // Error interno del servidor
+      alert("Ocurrió un error en el servidor. Intenta nuevamente más tarde.");
+    } else {
+      // Otro error
+      alert(
+        "Ocurrió un error inesperado. Por favor, contacta al administrador."
+      );
     }
   });
 

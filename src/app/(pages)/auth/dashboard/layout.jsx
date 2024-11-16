@@ -33,13 +33,9 @@ export default function Layout({ children }) {
         </div>
 
         {/* Inicio de la fila numero 4 */}
-        <div className="col-span-2 row-span-6 row-start-2 bg-gray-300 flex flex-col items-center justify-center">
-          <div className="h-14 w-full flex items-center ml-7">
-            <h2 className=" font-bold text-lg"> </h2>
-          </div>
-
+        <div className="col-span-2 row-span-6 row-start-2 bg-slate'100 flex flex-col items-center justify-center">
           {/* Inicio del Children */}
-          <div className="relative bg-slate-50 w-[90%] h-[95%] overflow-hidden">
+          <div className="relative bg-slate-100 w-[100%] h-[100%] overflow-hidden rounded-3xl">
             <main className="absolute w-full">{children}</main>
           </div>
         </div>

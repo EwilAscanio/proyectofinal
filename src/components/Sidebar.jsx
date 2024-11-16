@@ -83,7 +83,11 @@ const Sidebar = async () => {
           content="Ficha Animal"
           icono={<FaHorseHead />}
         />
-        <Button url={""} content="Vacunacion" icono={<FaBriefcaseMedical />} />
+        <Button
+          url={"/auth/dashboard/vacunacion"}
+          content="Vacunacion"
+          icono={<FaBriefcaseMedical />}
+        />
         <Button url={""} content="Pesaje" icono={<FaWeightScale />} />
         <Button url={""} content="Palpacion" icono={<FaHeart />} />
         <Button url={""} content="Nacimientos" icono={<FaCow />} />

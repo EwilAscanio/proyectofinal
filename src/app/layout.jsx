@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = localFont({
+const roboto = localFont({
   src: "./fonts/Roboto-Regular.ttf",
   variable: "--Roboto-Regular",
   weight: "100 900",
@@ -20,9 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistMono.variable} ${roboto.variable} antialiased`}>
         {children}
       </body>
     </html>
