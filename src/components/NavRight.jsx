@@ -43,7 +43,13 @@ const NavRight = async () => {
       <div className="flex items-center justify-center gap-4">
         <IoIosNotifications />
 
-        <Image src={imgbandera} width={30} height={10}></Image>
+        <Image
+          src={imgbandera}
+          alt="BanderaVzla"
+          width={30} // Ancho original de la imagen
+          height={10} // Altura original de la imagen
+          className="w-auto h-auto"
+        ></Image>
 
         <p>Español</p>
       </div>

@@ -12,6 +12,7 @@ import {
   FaPercent,
   FaChartLine,
 } from "react-icons/fa6";
+import { RiUserStarFill } from "react-icons/ri";
 import { TbReportAnalytics } from "react-icons/tb";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
@@ -57,6 +58,11 @@ const Sidebar = async () => {
               content="Eliminar"
               icono={<FaUserShield />}
             />
+            <Button
+              url={"/auth/dashboard/cliente"}
+              content="Clientes"
+              icono={<RiUserStarFill />}
+            />
           </>
         ) : (
           <>
@@ -88,11 +94,36 @@ const Sidebar = async () => {
           content="Vacunacion"
           icono={<FaBriefcaseMedical />}
         />
-        <Button url={""} content="Pesaje" icono={<FaWeightScale />} />
-        <Button url={""} content="Palpacion" icono={<FaHeart />} />
-        <Button url={""} content="Nacimientos" icono={<FaCow />} />
-        <Button url={""} content="Produccion" icono={<FaPercent />} />
-        <Button url={""} content="Ventas" icono={<FaChartLine />} />
+        <Button
+          url={"/auth/dashboard/peso"}
+          content="Pesaje"
+          icono={<FaWeightScale />}
+        />
+        <Button
+          url={"/auth/dashboard/palpacion"}
+          content="Palpacion"
+          icono={<FaHeart />}
+        />
+        <Button
+          url={"/auth/dashboard/nacimiento"}
+          content="Nacimientos"
+          icono={<FaCow />}
+        />
+        <Button
+          url={"/auth/dashboard/produccionleche"}
+          content="Produccion"
+          icono={<FaPercent />}
+        />
+        <Button
+          url={"/auth/dashboard/factura"}
+          content="Ventas"
+          icono={<FaChartLine />}
+        />
+        <Button
+          url={"/auth/dashboard/reportes"}
+          content="Reportes"
+          icono={<FaChartLine />}
+        />
       </div>
     </>
   );

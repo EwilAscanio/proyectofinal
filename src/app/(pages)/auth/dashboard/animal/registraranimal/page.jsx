@@ -54,13 +54,6 @@ const Animal = () => {
 
   return (
     <>
-      <div className="flex justify-around mt-4">
-        {/* <Link href={`/auth/dashboard/animal/listanimal`}>
-          <button className="bg-green-500 text-white py-1 px-3 rounded mr-2">
-            Listar Animales
-          </button>
-        </Link> */}
-      </div>
       <div className="flex items-center justify-center p-4">
         <div className="bg-white rounded-lg shadow-xl p-8 max-w-4xl w-full">
           <div className="text-center mb-8">

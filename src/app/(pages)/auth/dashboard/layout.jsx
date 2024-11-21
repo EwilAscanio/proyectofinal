@@ -16,6 +16,7 @@ export default function Layout({ children }) {
               width={150}
               height={300}
               className=" mt-6 object-contain"
+              alt="Logo Dashboard"
             ></Image>
           </div>
         </div>
@@ -33,10 +34,12 @@ export default function Layout({ children }) {
         </div>
 
         {/* Inicio de la fila numero 4 */}
-        <div className="col-span-2 row-span-6 row-start-2 bg-slate'100 flex flex-col items-center justify-center">
+        <div className="col-span-2 row-span-6 row-start-2  flex flex-col items-center justify-center ">
           {/* Inicio del Children */}
-          <div className="relative bg-slate-100 w-[100%] h-[100%] overflow-hidden rounded-3xl">
-            <main className="absolute w-full">{children}</main>
+          <div className="relative bg-slate-100 w-[100%] h-[100%] overflow-y-auto rounded-3xl">
+            <main className="absolute w-full overflow-auto rounded-xl">
+              {children}
+            </main>
           </div>
         </div>
       </div>

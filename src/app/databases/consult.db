@@ -31,6 +31,7 @@ CREATE TABLE `animal` (
   `fechaVacunacion_ani` date,
   `status_ani` varchar(50),
   `precio_ani` decimal DEFAULT 0,
+  `existencia` INT NOT NULL DEFAULT 0 ,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -56,6 +57,74 @@ CREATE TABLE `familia` (
 ALTER TABLE animal
 ADD CONSTRAINT `FK_AnimalFamilia`
 FOREIGN KEY (`id_fam`) REFERENCES familia(`id_fam`);
+
+CREATE TABLE `produccionleche` (
+  `id_lec` integer PRIMARY KEY AUTO_INCREMENT,
+  `codigo_ani` varchar(50) NOT NULL,
+  `litros_lec` decimal NOT NULL DEFAULT 0,
+   `fecha_lec` date NOT NULL
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `palpacion` (
+  `id_pal` integer PRIMARY KEY AUTO_INCREMENT,
+  `codigo_ani` varchar(50) NOT NULL,
+  `fecha_pal` date NOT NULL,
+  `animalembarazado_pal` bit DEFAULT 0,
+  `tiempogestacion_pal` integer DEFAULT 0,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `nacimiento` (
+  `id_nac` integer PRIMARY KEY AUTO_INCREMENT,
+  `codigo_ani` varchar(50) NOT NULL,
+  `fecha_pal` date NOT NULL,
+  `animalembarazado_pal` bit DEFAULT 0,
+  `tiempogestacion_pal` integer DEFAULT 0,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `clientes` (
+  `codigo_cli` integer PRIMARY KEY NOT NULL,
+  `nombre_cli` varchar(200) NOT NULL,
+  `telefono_cli` varchar(50) NOT NULL,
+  `direccion_cli` varchar(200) NOT NULL,
+  `rif_cli` varchar(50) NOT NULL,
+  `email_cli` varchar(200) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `factura`(
+  `numero_fac` int primary key  not null unique,
+  `codigo_cli` integer NOT NULL,
+  `fecha_fac` date NOT NULL,
+  `total_fac` decimal NOT NULL,
+  `observaciones_fac` varchar(200) NOT NULL
+);
+
+
+CREATE TABLE `detalle_factura`(
+  `numero_fac` integer not null,
+  `codigo_ani` integer primary key NOT NULL,
+  `cantidad_fac` integer NOT NULL,
+  `precio_fac` decimal(10,2) NOT NULL,
+  `total_fac` decimal(10,2) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+
+ALTER TABLE factura
+ADD CONSTRAINT `FK_FacturaClientes`
+FOREIGN KEY (`codigo_cli`) REFERENCES Clientes(`codigo_cli`);
+
+ALTER TABLE detalle_factura
+ADD CONSTRAINT `FK_Detalle_FacturaFactura`
+FOREIGN KEY (`numero_fac`) REFERENCES factura(`numero_fac`);
+
+
+ALTER TABLE detalle_factura
+ADD CONSTRAINT `FK_AnimalDetalle_Factura`
+FOREIGN KEY (`codigo_ani`) REFERENCES animal(`codigo_ani`);
+
 
 
 
