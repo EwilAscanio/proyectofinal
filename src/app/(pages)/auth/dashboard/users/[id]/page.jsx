@@ -7,7 +7,7 @@ import ButtonDelete from "@/components/ButtonDelete";
 
 const loadUser = async (user_id) => {
   const { data } = await axios.get(
-    `http://localhost:3000/api/delete/${user_id}`
+    `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/users/${user_id}`
   );
   console.log("Data recibida de funcion loadUser NEwWS:", data);
   return data;

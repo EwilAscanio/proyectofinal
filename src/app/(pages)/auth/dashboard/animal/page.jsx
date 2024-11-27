@@ -1,21 +1,31 @@
 import axios from "axios";
 import Link from "next/link";
-import ImagenProfile from "@/images/8380015.jpg";
-import Image from "next/image";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const loadAnimal = async () => {
-  const { data } = await axios.get("http://localhost:3000/api/animal");
-  console.log("DATA RECIBIDA GET", data);
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/animal`
+  );
+
   return data;
 };
 
 const UsersPage = async () => {
   const animals = await loadAnimal();
 
-  console.log("ANIMALES RECIBIDOS", animals);
-  let sexoanimal = "";
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Meses son 0-indexados
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
+  const animalsFormat = animals.map((animal) => ({
+    ...animal,
+
+    fechaVacunacion_ani: formatDate(animal.fechaVacunacion_ani),
+  }));
 
   return (
     <>
@@ -43,29 +53,23 @@ const UsersPage = async () => {
             </tr>
           </thead>
           <tbody>
-            {animals.map((animal) => (
+            {animalsFormat.map((animal) => (
               <tr key={animal.codigo_ani} className="text-center border-t">
                 <td className="py-2 px-4">{animal.codigo_ani}</td>
 
                 <td className="py-2 px-4">{animal.nombre_ani}</td>
-                <td className="py-2 px-4">
-                  {animal.sexo_ani == 1
-                    ? (sexoanimal = "Macho")
-                    : (sexoanimal = "Hembra")}
-                </td>
+                <td className="py-2 px-4">{animal.sexo_ani}</td>
                 <td className="py-2 px-4">{animal.fechaVacunacion_ani}</td>
                 <td className="py-2 px-4">
                   <Link
-                    href=""
-                    /*href={`/auth/dashboard/updateusers/${animal.codigo_ani}`}*/
+                    href={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/auth/dashboard/animal/updateanimal/${animal.codigo_ani}`}
                   >
                     <button className="bg-blue-500 text-white py-1 px-3 rounded mr-2">
                       Actualizar
                     </button>
                   </Link>
                   <Link
-                    href=""
-                    /*href={`http://localhost:3000/auth/dashboard/animal/${animal.codigo_ani}`}*/
+                    href={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/auth/dashboard/animal/deleteanimal/${animal.codigo_ani}`}
                   >
                     <button className="bg-red-500 text-white py-1 px-3 rounded">
                       Eliminar

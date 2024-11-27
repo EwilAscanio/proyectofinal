@@ -78,9 +78,8 @@ CREATE TABLE `palpacion` (
 CREATE TABLE `nacimiento` (
   `id_nac` integer PRIMARY KEY AUTO_INCREMENT,
   `codigo_ani` varchar(50) NOT NULL,
-  `fecha_pal` date NOT NULL,
-  `animalembarazado_pal` bit DEFAULT 0,
-  `tiempogestacion_pal` integer DEFAULT 0,
+  `fecha_nac` date NOT NULL,
+  `cantidadHijos_nac` integer DEFAULT 0,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -124,6 +123,13 @@ FOREIGN KEY (`numero_fac`) REFERENCES factura(`numero_fac`);
 ALTER TABLE detalle_factura
 ADD CONSTRAINT `FK_AnimalDetalle_Factura`
 FOREIGN KEY (`codigo_ani`) REFERENCES animal(`codigo_ani`);
+
+CREATE TABLE `configuracion` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `numero_fac` integer NOT NULL,
+    `ultima_vacunacion` date NOT NULL
+);
+
 
 
 

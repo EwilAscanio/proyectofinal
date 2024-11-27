@@ -4,7 +4,9 @@ import Swal from "sweetalert2";
 import { FaBarcode, FaCalendar } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
+import RegisterAnimal from "@/components/RegisterAnimal";
 
 const Nacimiento = () => {
   const router = useRouter();
@@ -19,6 +21,12 @@ const Nacimiento = () => {
   const [animalCargado, setAnimalCargado] = useState(false);
   const [animalMadre, setAnimalMadre] = useState(null);
   const [cantidadHijos, setCantidadHijos] = useState(1);
+  const [mostrarModal, setMostrarModal] = useState(true);
+
+  useEffect(() => {
+    // Cierra el modal cuando se monta el componente
+    setMostrarModal(false);
+  }, []);
 
   const buscarAnimal = async (codigo) => {
     if (!codigo) {
@@ -30,7 +38,7 @@ const Nacimiento = () => {
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/animal/${codigo}`
       );
-      if (res.status === 200 && res.data.sexo === "hembra") {
+      if (res.status === 200 && res.data.sexo_ani === "Hembra") {
         setAnimalMadre(res.data);
         setAnimalCargado(true);
         Swal.fire({
@@ -64,7 +72,7 @@ const Nacimiento = () => {
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/nacimiento`,
-        { ...data, animalMadre, cantidadHijos }
+        { ...data, animalMadre }
       );
       if (res.status === 200) {
         Swal.fire({
@@ -72,8 +80,7 @@ const Nacimiento = () => {
           text: "El nacimiento se registró correctamente.",
           icon: "success",
           confirmButtonColor: "#3085d6",
-        });
-        router.push("/auth/dashboard");
+        }).then(() => setMostrarModal(true));
       }
     } catch (error) {
       console.error(error);
@@ -85,6 +92,11 @@ const Nacimiento = () => {
       });
     }
   });
+
+  const handleClose = () => {
+    setMostrarModal(false);
+    router.push(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/auth/dashboard`); // Redirigir al dashboard
+  };
 
   return (
     <div className="flex items-center justify-center p-4">
@@ -154,23 +166,44 @@ const Nacimiento = () => {
                   type="number"
                   placeholder="Cantidad de hijos paridos"
                   className="w-full pl-4 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={cantidadHijos}
                   onChange={(e) => setCantidadHijos(e.target.value)}
-                  min="1"
-                  required
+                  {...register("cantidadHijos_nac", {
+                    required: {
+                      value: true,
+                      message: "Campo requerido",
+                    },
+                    min: {
+                      value: 1,
+                      message: "El campo no puede ser vacío",
+                    },
+                  })}
                 />
               </div>
+
+              <button
+                type="submit"
+                className="w-full bg-blue-500 text-white rounded-lg p-2"
+              >
+                Registrar Nacimiento
+              </button>
             </>
           )}
-
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white rounded-lg p-2"
-            disabled={!animalCargado} // Deshabilita el botón si no hay animal cargado
-          >
-            Registrar Nacimiento
-          </button>
         </form>
+
+        {/* Modal para registrar animales */}
+        {mostrarModal && (
+          <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-600 bg-opacity-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg max-w-3xl w-full">
+              <RegisterAnimal /> {/* Aquí se incluye el componente */}
+              <button
+                onClick={handleClose}
+                className="mt-4 bg-red-500 text-white rounded-lg px-4 py-2"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import ImageHome from "@/images/imagen1.jpg";
-import Logo from "@/images/logo3.jpeg";
 import Footer from "@/components/Footer";
 import NavbarTransparent from "@/components/NavbarTransparent";
 

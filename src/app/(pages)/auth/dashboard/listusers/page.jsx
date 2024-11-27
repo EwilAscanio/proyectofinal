@@ -32,39 +32,39 @@ const UsersPage = async () => {
         <table className="min-w-full bg-white">
           <thead>
             <tr>
-              <th className="py-2 px-4 bg-gray-200">Nombre</th>{" "}
-              <th className="py-2 px-4 bg-gray-200">Correo</th>{" "}
-              <th className="py-2 px-4 bg-gray-200">Acciones</th>{" "}
+              <th className="py-2 px-4 bg-gray-200">Nombre</th>
+              <th className="py-2 px-4 bg-gray-200">Correo</th>
+              <th className="py-2 px-4 bg-gray-200">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr key={user.id_usr} className="text-center border-t">
-                <td className="py-2 px-4">{user.name_usr}</td>{" "}
-                <td className="py-2 px-4">{user.email_usr}</td>{" "}
+                <td className="py-2 px-4">{user.name_usr}</td>
+                <td className="py-2 px-4">{user.email_usr}</td>
                 <td className="py-2 px-4">
-                  <Link href={`/auth/dashboard/updateusers/${user.id_usr}`}>
+                  <Link
+                    href={`/auth/dashboard/listusers/updateusers/${user.id_usr}`}
+                  >
                     <button className="bg-blue-500 text-white py-1 px-3 rounded mr-2">
                       Actualizar
                     </button>
                   </Link>
                   {sesion.user.email !== user.email_usr && (
                     <Link
-                      href={`http://localhost:3000/auth/dashboard/users/${user.id_usr}`}
+                      href={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/auth/dashboard/listusers/deleteusers/${user.id_usr}`}
                     >
-                      {" "}
                       <button className="bg-red-500 text-white py-1 px-3 rounded">
-                        {" "}
-                        Eliminar{" "}
-                      </button>{" "}
+                        Eliminar
+                      </button>
                     </Link>
-                  )}{" "}
-                </td>{" "}
+                  )}
+                </td>
               </tr>
-            ))}{" "}
-          </tbody>{" "}
-        </table>{" "}
-      </div>{" "}
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };

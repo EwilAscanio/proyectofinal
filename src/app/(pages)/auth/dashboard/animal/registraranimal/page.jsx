@@ -10,7 +10,6 @@ import {
   LuLock,
   LuArrowRight,
 } from "react-icons/lu";
-import Link from "next/link";
 import Swal from "sweetalert2";
 
 const Animal = () => {
@@ -23,9 +22,10 @@ const Animal = () => {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    const res = await axios.post("http://localhost:3000/api/animal", data);
-
-    console.log(res);
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/animal`,
+      data
+    );
 
     if (res.status == 200) {
       Swal.fire({
@@ -34,7 +34,7 @@ const Animal = () => {
         icon: "success",
         confirmButtonColor: "#3085d6",
       });
-      router.push("http://localhost:3000/auth/dashboard");
+      router.push(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/auth/dashboard`);
       router.refresh();
     } else if (res.status === 400) {
       // Error de validación del servidor

@@ -11,7 +11,6 @@ import {
   LuMapPin,
   LuFileText,
 } from "react-icons/lu";
-import Link from "next/link";
 import Swal from "sweetalert2";
 
 const RegisterClient = () => {
@@ -25,7 +24,10 @@ const RegisterClient = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/cliente", data);
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/cliente`,
+        data
+      );
 
       console.log("DATA CLIENTE FRONTEND", res);
 

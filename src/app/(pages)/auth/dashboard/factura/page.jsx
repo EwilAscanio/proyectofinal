@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { FaBarcode } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Factura = () => {
   const router = useRouter();
@@ -16,17 +16,36 @@ const Factura = () => {
     getValues,
   } = useForm();
 
+  // Utilizo el hook useState para almacenar el numero de factura
+  const [numeroFac, setNumeroFac] = useState("");
+
+  //Utilizo el UseEffect para obtener el numero de factura
+  useEffect(() => {
+    const obtenerNumeroFactura = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/configuracion`
+        );
+
+        const config = res.data[0];
+
+        if (res.status === 200) {
+          setNumeroFac(parseInt(config.numero_fac, 10)); // Asumimos que el valor es un número
+        }
+      } catch (error) {
+        console.error("Error al obtener el número de factura:", error);
+      }
+    };
+
+    obtenerNumeroFactura();
+  }, []);
+
   //Estados de carga de cliente cargado, animales, total y cliente
   const [clienteCargado, setClienteCargado] = useState(false);
   const [animales, setAnimales] = useState([]);
   const [animal, setAnimal] = useState("");
   const [total, setTotal] = useState(0);
   const [cliente, setCliente] = useState("");
-  const [numeroFac, setNumeroFac] = useState(10);
-
-  const aumentarNumeroFac = () => {
-    setNumeroFac(numeroFac + 1);
-  };
 
   //Funcion para buscar cliente
   const buscarCliente = async (codigo) => {
@@ -71,6 +90,17 @@ const Factura = () => {
         `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/animal/${codigo}`
       );
       if (res.status === 200) {
+        if (res.data.status_ani === "2") {
+          Swal.fire({
+            title: "Advertencia",
+            text: "Este animal esta inactivo y no puede ser agregado a la factura.",
+            icon: "warning",
+            confirmButtonColor: "#d33",
+          });
+          input.codigo_ani = "";
+          return;
+        }
+
         const animalExistente = animales.find(
           (animal) => animal.codigo_ani === res.data.codigo_ani
         );
@@ -86,7 +116,7 @@ const Factura = () => {
           return;
         }
 
-        // Crando variable para aegurar que el precio sea un número.
+        // Creando variable para aegurar que el precio sea un número.
         const precio = parseFloat(res.data.precio_ani) || 0;
 
         setAnimales((prev) => [...prev, { ...res.data, precio }]);
@@ -114,11 +144,35 @@ const Factura = () => {
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/factura`,
-        { ...data, animales, total }
+        { ...data, numeroFac: numeroFac, animales, total }
       );
-      console.log("RES FACTURA", res);
-      aumentarNumeroFac();
+
       if (res.status === 200) {
+        // Actualizar solo el número de factura
+
+        await axios.put(
+          `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/configuracion`,
+          {
+            numero_fac: numeroFac + 1, // Incrementar el número de factura
+          }
+        );
+
+        // Obtener el nuevo número de factura
+        const updatedConfig = await axios.get(
+          `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/configuracion`
+        );
+        setNumeroFac(parseInt(updatedConfig.data[0].numero_fac, 10));
+
+        // Actualizar el estado de los animales a "inactivo"
+        await Promise.all(
+          animales.map(async (animal) => {
+            await axios.put(
+              `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/statusAnimal/${animal.codigo_ani}`,
+              { status_ani: 2 }
+            );
+          })
+        );
+
         Swal.fire({
           title: "Éxito",
           text: "Factura registrada correctamente.",
@@ -139,6 +193,7 @@ const Factura = () => {
     }
   });
 
+  // Función para imprimir la factura Falta Implementar
   const imprimirFactura = () => {
     window.print();
   };
@@ -161,7 +216,7 @@ const Factura = () => {
             />
             <input
               type="number"
-              placeholder="Numero de Factura"
+              placeholder="Número de Factura"
               value={numeroFac}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...register("numero_fac", {
@@ -170,6 +225,7 @@ const Factura = () => {
                   message: "Campo requerido",
                 },
               })}
+              readOnly
             />
           </div>
           <div className="flex items-center relative gap-4">
@@ -192,7 +248,8 @@ const Factura = () => {
             <input
               type="text"
               placeholder="Nombre del cliente"
-              value={cliente}
+              defaultValue={cliente}
+              //onChange={(e) => setCliente(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
@@ -223,7 +280,7 @@ const Factura = () => {
             <input
               type="text"
               placeholder="Nombre del Animal"
-              value={animal}
+              defaultValue={animal}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
@@ -238,7 +295,12 @@ const Factura = () => {
             type="text"
             placeholder="Observaciones"
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            {...register("observaciones_fac")}
+            {...register("observaciones_fac", {
+              required: {
+                value: true,
+                message: "Campo requerido",
+              },
+            })}
           />
           <div>
             <h2 className="text-lg font-semibold">Animales Agregados:</h2>

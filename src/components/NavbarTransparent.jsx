@@ -2,8 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
-
-import Logo from "@/images/logo3.jpeg";
+import Logo from "@/images/logo3.jpg";
 
 const Navbar2 = () => {
   const [isClick, setisClick] = useState(false);

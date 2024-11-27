@@ -2,38 +2,22 @@ import { NextResponse } from "next/server";
 import { conn } from "@/libs/mariadb";
 
 export const POST = async (req) => {
+  console.log("POST NACIMIENTO", req.body);
   try {
-    let { codigo_ani, fecha_pal, animalembarazado_pal, tiempogestacion_pal } =
-      await req.json();
+    const { codigo_ani, fecha_nac, cantidadHijos_nac } = await req.json();
 
     // Validar que se haya proporcionado el código del animal, litros y fecha
-    if (!codigo_ani || !fecha_pal) {
+    if (!codigo_ani || !fecha_nac || !cantidadHijos_nac) {
       return NextResponse.json(
         { message: "Los datos son requeridos." },
         { status: 400 }
       );
     }
 
-    //Se cambian los valores que vienen undefined para registrarlos 0 en la base de datos
-    if (animalembarazado_pal == null && tiempogestacion_pal == null) {
-      animalembarazado_pal = 0;
-      tiempogestacion_pal = 0;
-    }
-
-    console.log(
-      "Código del animal:",
-      codigo_ani,
-      "FECHA:",
-      fecha_pal,
-      "EMBARAZO:",
-      animalembarazado_pal,
-      "GESTACION:",
-      tiempogestacion_pal
-    );
-    // Insertar el proceso de palpacion
+    // Insertar el proceso de Nacimiento en la base de datos
     const result = await conn.query(
-      `INSERT INTO palpacion (codigo_ani, fecha_pal, animalembarazado_pal, tiempogestacion_pal) VALUES (?, ?, ?, ?)`,
-      [codigo_ani, fecha_pal, animalembarazado_pal, tiempogestacion_pal]
+      `INSERT INTO nacimiento (codigo_ani, fecha_nac, cantidadHijos_nac) VALUES (?, ?, ?)`,
+      [codigo_ani, fecha_nac, cantidadHijos_nac]
     );
 
     return NextResponse.json(result);

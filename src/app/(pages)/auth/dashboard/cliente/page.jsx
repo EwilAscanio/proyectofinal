@@ -1,9 +1,5 @@
 import axios from "axios";
 import Link from "next/link";
-import ImagenProfile from "@/images/8380015.jpg";
-import Image from "next/image";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const loadCliente = async () => {
   const { data } = await axios.get(
@@ -39,7 +35,7 @@ const UsersPage = async () => {
               <th className="py-2 px-4 bg-gray-200">Codigo</th>
               <th className="py-2 px-4 bg-gray-200">Nombre</th>
               <th className="py-2 px-4 bg-gray-200">Telefono</th>
-              <th className="py-2 px-4 bg-gray-200">Correo</th>
+              <th className="py-2 px-4 bg-gray-200">Rif</th>
               <th className="py-2 px-4 bg-gray-200">Email</th>
               <th className="py-2 px-4 bg-gray-200">Acciones</th>
             </tr>
@@ -55,16 +51,14 @@ const UsersPage = async () => {
                 <td className="py-2 px-4">{cliente.email_cli}</td>
                 <td className="py-2 px-4">
                   <Link
-                    href=""
-                    /*href={`/auth/dashboard/updateusers/${animal.codigo_ani}`}*/
+                    href={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/auth/dashboard/cliente/updatecliente/${cliente.codigo_cli}`}
                   >
                     <button className="bg-blue-500 text-white py-1 px-3 rounded mr-2">
                       Actualizar
                     </button>
                   </Link>
                   <Link
-                    href=""
-                    /*href={`http://localhost:3000/auth/dashboard/animal/${animal.codigo_ani}`}*/
+                    href={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/auth/dashboard/cliente/deletecliente/${cliente.codigo_cli}`}
                   >
                     <button className="bg-red-500 text-white py-1 px-3 rounded">
                       Eliminar

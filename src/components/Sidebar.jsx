@@ -20,7 +20,7 @@ import axios from "axios";
 
 const loadUser = async (email) => {
   const { data } = await axios.get(`http://localhost:3000/api/users/${email}`);
-  console.log("Data recibida de funcion loadUser:", data);
+
   return data;
 };
 const Sidebar = async () => {
@@ -43,21 +43,10 @@ const Sidebar = async () => {
             />
             <Button
               url={"/auth/dashboard/listusers"}
-              content="Listar Usuarios"
+              content="Usuarios"
               icono={<TbReportAnalytics />}
             />
 
-            <Button
-              url={"/auth/dashboard/updateusers"}
-              content="Actualizar"
-              icono={<FaUsers />}
-            />
-
-            <Button
-              url={"/auth/dashboard/users"}
-              content="Eliminar"
-              icono={<FaUserShield />}
-            />
             <Button
               url={"/auth/dashboard/cliente"}
               content="Clientes"

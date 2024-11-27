@@ -13,10 +13,9 @@ export default function Layout({ children }) {
           <div className="flex items-center justify-center h-[100%]">
             <Image
               src={Logo}
-              width={150}
-              height={300}
-              className=" mt-6 object-contain"
+              className=" mt-6 object-contain w-36 h-auto"
               alt="Logo Dashboard"
+              priority
             ></Image>
           </div>
         </div>

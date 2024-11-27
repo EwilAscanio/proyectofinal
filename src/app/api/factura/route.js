@@ -6,6 +6,7 @@ export const POST = async (req) => {
     const data = await req.json();
 
     const { numero_fac, codigo_cli, observaciones_fac, animales } = data;
+    console.log("DATA FACTURA", data);
 
     // Validar que los datos necesarios estén presentes
     if (
