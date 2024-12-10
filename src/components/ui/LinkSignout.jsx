@@ -20,6 +20,7 @@ const LinkSignout = () => {
           confirmButtonText: "Sí, cerrar sesión",
         }).then((result) => {
           if (result.isConfirmed) {
+            console.log("signout", result.isConfirmed);
             signOut();
           }
         });

@@ -3,8 +3,6 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req, { params }) => {
   try {
-    console.log("Parámetros recibidos GET ANIMAL:", params);
-
     const result = await conn.query(`
           SELECT * FROM animal WHERE codigo_ani = "${params.id}"`);
 

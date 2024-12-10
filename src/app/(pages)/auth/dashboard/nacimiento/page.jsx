@@ -193,8 +193,8 @@ const Nacimiento = () => {
         {/* Modal para registrar animales */}
         {mostrarModal && (
           <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-600 bg-opacity-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-3xl w-full">
-              <RegisterAnimal /> {/* Aquí se incluye el componente */}
+            <div className="bg-white rounded-lg shadow-lg max-w-6xl overflow-auto max-h-[85vh]">
+              <RegisterAnimal />
               <button
                 onClick={handleClose}
                 className="mt-4 bg-red-500 text-white rounded-lg px-4 py-2"

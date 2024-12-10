@@ -3,9 +3,7 @@ import { conn } from "@/libs/mariadb";
 
 export const PUT = async (req) => {
   try {
-    console.log("Intentando actualizar el peso...", req);
     const { codigo_ani, peso_ani } = await req.json();
-    console.log("Código del animal:", codigo_ani, "Peso:", peso_ani);
 
     // Validar que se haya proporcionado el peso y el código del animal
     if (!codigo_ani || !peso_ani) {

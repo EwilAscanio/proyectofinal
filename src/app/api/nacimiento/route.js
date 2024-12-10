@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { conn } from "@/libs/mariadb";
 
 export const POST = async (req) => {
-  console.log("POST NACIMIENTO", req.body);
   try {
     const { codigo_ani, fecha_nac, cantidadHijos_nac } = await req.json();
 

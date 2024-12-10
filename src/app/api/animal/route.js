@@ -5,11 +5,27 @@ export const GET = async () => {
   try {
     const result = await conn.query("SELECT * FROM animal");
 
-    return NextResponse.json(result, { status: 200 });
+    // Consulta para obtener el conteo total de animales
+    const [countResult] = await conn.query(
+      "SELECT COUNT(*) AS cantidad FROM animal"
+    );
+
+    // Verifica que countResult tenga resultados
+    if (!countResult || countResult.length === 0) {
+      throw new Error("No se pudo obtener el conteo de animales.");
+    }
+
+    // Obtiene el valor de cantidad de animales
+    const cantidadAnimales = countResult.cantidad;
+
+    return NextResponse.json(
+      { infoAnimales: result, total: cantidadAnimales },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       {
-        message: result.error || "Error al obtener los animales",
+        message: error.message || "Error al obtener los animales",
       },
       {
         status: 500,
@@ -21,7 +37,7 @@ export const GET = async () => {
 export const POST = async (req) => {
   try {
     const data = await req.json();
-    console.log(data);
+
     const {
       codigo_ani,
       nombre_ani,
@@ -39,8 +55,6 @@ export const POST = async (req) => {
       precio_ani,
     } = data;
 
-    console.log("DATA", data);
-
     const result = await conn.query("INSERT INTO animal set ?", {
       codigo_ani,
       nombre_ani,
@@ -57,8 +71,6 @@ export const POST = async (req) => {
       status_ani,
       precio_ani,
     });
-
-    console.log(result);
 
     return NextResponse.json(result);
   } catch (error) {

@@ -3,7 +3,7 @@ import { conn } from "@/libs/mariadb";
 
 export const POST = async (req) => {
   try {
-    let { codigo_ani, fecha_pal, animalembarazado_pal, tiempogestacion_pal } =
+    const { codigo_ani, fecha_pal, animalembarazado_pal, tiempogestacion_pal } =
       await req.json();
 
     // Validar que se haya proporcionado el código del animal, litros y fecha
@@ -20,16 +20,6 @@ export const POST = async (req) => {
       tiempogestacion_pal = 0;
     }
 
-    console.log(
-      "Código del animal:",
-      codigo_ani,
-      "FECHA:",
-      fecha_pal,
-      "EMBARAZO:",
-      animalembarazado_pal,
-      "GESTACION:",
-      tiempogestacion_pal
-    );
     // Insertar el proceso de palpacion
     const result = await conn.query(
       `INSERT INTO palpacion (codigo_ani, fecha_pal, animalembarazado_pal, tiempogestacion_pal) VALUES (?, ?, ?, ?)`,

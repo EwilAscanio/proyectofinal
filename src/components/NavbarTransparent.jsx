@@ -42,7 +42,15 @@ const Navbar2 = () => {
           >
             Contacto
           </Link>
+
+          <Link
+            href="/about"
+            className="text-xl sm:lg hover:text-blue-500 hover:underline cursor-pointer"
+          >
+            About
+          </Link>
         </div>
+
         <button
           onClick={toogleNavbar}
           className="md:hidden block p-2 rounded-md hover:bg-transparentinline-flex items-center justify-center text-white hover:text-white "

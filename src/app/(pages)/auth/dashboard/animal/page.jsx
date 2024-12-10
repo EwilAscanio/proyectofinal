@@ -5,12 +5,20 @@ const loadAnimal = async () => {
   const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/animal`
   );
+  console.log("DATA ANIMALES", data.infoAnimales);
+  console.log("DATA TOTAL ANIMALES", data.total);
 
-  return data;
+  return {
+    animals: data.infoAnimales,
+    total: data.total,
+  };
 };
 
-const UsersPage = async () => {
-  const animals = await loadAnimal();
+const ListAnimal = async () => {
+  const { animals, total } = await loadAnimal();
+
+  console.log("TOTAL ANIMALES", total);
+  console.log("ANIMALES", animals);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -85,4 +93,4 @@ const UsersPage = async () => {
   );
 };
 
-export default UsersPage;
+export default ListAnimal;

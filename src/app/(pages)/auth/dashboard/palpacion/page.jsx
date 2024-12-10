@@ -2,7 +2,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import { FaBarcode, FaCalendar } from "react-icons/fa";
-import { LuMilk } from "react-icons/lu";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

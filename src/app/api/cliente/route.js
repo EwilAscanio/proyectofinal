@@ -21,7 +21,7 @@ export const GET = async () => {
 export const POST = async (req) => {
   try {
     const data = await req.json();
-    console.log("DATA CLIENTE", data);
+
     const {
       codigo_cli,
       nombre_cli,
@@ -37,8 +37,6 @@ export const POST = async (req) => {
       [codigo_cli]
     );
 
-    console.log("CLIENTE EXISTENTE", existingClient);
-
     if (existingClient.length > 0) {
       return NextResponse.json(
         {
@@ -50,15 +48,6 @@ export const POST = async (req) => {
       );
     }
 
-    console.log(
-      codigo_cli,
-      nombre_cli,
-      telefono_cli,
-      direccion_cli,
-      rif_cli,
-      email_cli
-    );
-
     const result = await conn.query("INSERT INTO clientes SET ?", {
       codigo_cli,
       nombre_cli,
@@ -67,8 +56,6 @@ export const POST = async (req) => {
       rif_cli,
       email_cli,
     });
-
-    console.log(result);
 
     return NextResponse.json(result);
   } catch (error) {

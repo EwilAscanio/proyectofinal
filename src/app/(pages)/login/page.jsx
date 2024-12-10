@@ -29,8 +29,6 @@ const Login = () => {
       redirect: false,
     });
 
-    console.log(resp);
-
     if (resp.error) {
       Swal.fire({
         title: "Credenciales Incorrectas",
@@ -40,7 +38,7 @@ const Login = () => {
       });
       setError(resp.error);
     } else {
-      router.push("http://localhost:3000/auth/dashboard");
+      router.push(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/auth/dashboard`);
       router.refresh();
     }
   });

@@ -42,7 +42,7 @@ const UsersPage = async () => {
           </thead>
           <tbody>
             {clientes.map((cliente) => (
-              <tr key={clientes.codigo_cli} className="text-center border-t">
+              <tr key={cliente.codigo_cli} className="text-center border-t">
                 <td className="py-2 px-4">{cliente.codigo_cli}</td>
 
                 <td className="py-2 px-4">{cliente.nombre_cli}</td>

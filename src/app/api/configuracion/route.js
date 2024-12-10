@@ -24,8 +24,6 @@ export const PUT = async (req) => {
 
     const { numero_fac, ultima_vacunacion } = data;
 
-    console.log("DATA", data);
-
     if (!numero_fac) {
       const result = await conn.query(
         `UPDATE configuracion
@@ -56,57 +54,3 @@ export const PUT = async (req) => {
     );
   }
 };
-
-/* Verificar Luego
-export const PUT = async (req) => {
-  try {
-    const data = await req.json();
-    const { numero_fac, ultima_vacunacion } = data;
-
-    console.log("DATA", data);
-
-    // Variable para verificar si se realizó alguna actualización
-    let updated = false;
-
-    if (numero_fac !== undefined) {
-      await conn.query(
-        `UPDATE configuracion
-         SET numero_fac = ?
-         WHERE id = 1`,
-        [numero_fac]
-      );
-      updated = true; // Marcar que se actualizó
-    }
-
-    if (ultima_vacunacion !== undefined) {
-      await conn.query(
-        `UPDATE configuracion
-         SET ultima_vacunacion = ?
-         WHERE id = 1`,
-        [ultima_vacunacion]
-      );
-      updated = true; // Marcar que se actualizó
-    }
-    console.log("FACTURA", numero_fac);
-    console.log("ULTIMA VAC", ultima_vacunacion);
-    console.log("UPDATED", updated);
-    if (updated) {
-      return NextResponse.json(
-        { message: "La configuración se actualizó correctamente" },
-        { status: 200 }
-      );
-    } else {
-      return NextResponse.json(
-        { message: "No se proporcionaron datos para actualizar." },
-        { status: 400 }
-      );
-    }
-  } catch (error) {
-    console.error("Error al actualizar:", error.message);
-    return NextResponse.json(
-      { message: "Ocurrió un error al actualizar la configuración." },
-      { status: 500 }
-    );
-  }
-};
-*/

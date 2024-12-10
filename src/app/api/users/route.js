@@ -10,8 +10,6 @@ export const GET = async () => {
   try {
     const result = await conn.query("SELECT * FROM users");
 
-    console.log(result);
-
     return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json(
