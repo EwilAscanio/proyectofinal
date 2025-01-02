@@ -56,7 +56,7 @@ const ChartComponent = () => {
     return () => {
       myChart.destroy();
     };
-  }, []);
+  }, [data, options]);
 
   return (
     <div className="flex items-center justify-center lg:h-72">

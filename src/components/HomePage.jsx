@@ -28,7 +28,7 @@ const HomePage = () => {
         {/* Contenido principal */}
         <main className="flex-grow flex flex-col items-center justify-center text-white text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Bienvenido a Ganaderia "Los Chorrerones"
+            Bienvenido a Ganaderia Los Chorrerones
           </h1>
           <p className="text-xl mb-8">
             Cuidado de animales y producción láctea de calidad

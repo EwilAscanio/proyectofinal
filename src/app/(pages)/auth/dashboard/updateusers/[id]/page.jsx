@@ -83,7 +83,7 @@ const UpdateUsers = ({ params }) => {
         id_rol: res.data.id_rol,
       });
     });
-  }, []);
+  }, [params.id]);
 
   return (
     <div className="  flex items-center justify-center p-4">

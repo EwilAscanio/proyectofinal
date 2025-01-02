@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight, FaUtensils } from "react-icons/fa";
+import Image from "next/image";
 
 const foodItems = [
   {
@@ -43,7 +44,7 @@ const CarouselItem = ({ item, isActive }) => (
       isActive ? "opacity-100" : "opacity-0"
     }`}
   >
-    <img
+    <Image
       src={item.image}
       alt={item.name}
       className="w-full h-full object-cover rounded-lg"

@@ -3,7 +3,7 @@ import { conn } from "@/libs/mariadb";
 
 export const POST = async (req) => {
   try {
-    const { codigo_ani, fecha_pal, animalembarazado_pal, tiempogestacion_pal } =
+    let { codigo_ani, fecha_pal, animalembarazado_pal, tiempogestacion_pal } =
       await req.json();
 
     // Validar que se haya proporcionado el código del animal, litros y fecha

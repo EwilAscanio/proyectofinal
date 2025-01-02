@@ -28,7 +28,7 @@ const Layout = () => {
 
         <div className="">
           <div className="flex items-center justify-center h-[100%]">
-            <Image src={logo} width={300} height={600}></Image>
+            <Image src={logo} alt="Logo" width={300} height={600}></Image>
           </div>
         </div>
 
