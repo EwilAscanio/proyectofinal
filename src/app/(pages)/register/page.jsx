@@ -26,7 +26,7 @@ const Register = () => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/registeruser",
+        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/users/register`,
         data
       );
 
