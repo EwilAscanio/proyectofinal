@@ -6,8 +6,7 @@ CREATE TABLE `users` (
   `login_usr` varchar(100) NOT NULL,
   `email_usr` varchar(50) NOT NULL,
   `password_usr` varchar(200) NOT NULL,
-  `role_usr` varchar(50) DEFAULT "Usuario,
-  `id_rol` varchar(50) NOT NULL,
+  `id_rol` integer NOT NULL,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -15,6 +14,15 @@ CREATE TABLE `roles` (
   `id_rol` integer PRIMARY KEY AUTO_INCREMENT,
   `name_rol` VARCHAR(50) DEFAULT 'Usuario',
 );
+
+
+INSERT INTO roles(name_rol) VALUES('Administrador')
+INSERT INTO roles(name_rol) VALUES('Usuario') 
+
+ALTER TABLE users
+ADD CONSTRAINT FK_UserRol
+FOREIGN KEY (role_id) REFERENCES users(id_rol);
+ 
 
 CREATE TABLE `animal` (
   `codigo_ani` integer PRIMARY KEY unique,
@@ -151,7 +159,7 @@ add COLUMN id_rol int NOT NULL
 AFTER role_usr
 
 ALTER TABLE users
-drop COLUMN role_id
+drop COLUMN id_rol
 
 ALTER TABLE usuario
 MODIFY COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -165,10 +173,5 @@ INSERT INTO usuario (id, nombre, email, rol)
 INSERT INTO usuario (nombre_usr, password_usr, email_usr, rol_usr)
 VALUES ("Ewil", 1234, "ewil@gmail.com", "administardor")
 
-ALTER TABLE users
-ADD CONSTRAINT FK_UserRol
-FOREIGN KEY (role_id) REFERENCES users(id_rol);
 
-INSERT INTO roles(name_rol) VALUES('Administrador')
-INSERT INTO roles(name_rol) VALUES('Usuario') 
- 
+
