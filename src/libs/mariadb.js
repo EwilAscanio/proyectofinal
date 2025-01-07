@@ -1,6 +1,18 @@
 import mariadb from "serverless-mysql";
 
 // Creacion de los parametros de conexion con la base de Databas.
+
+export const conn = mariadb({
+  config: {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
+  },
+});
+
+/*
 export const conn = mariadb({
   config: {
     host: "bx1se9kjyjbhzzhkqgpm-mysql.services.clever-cloud.com",
@@ -11,7 +23,7 @@ export const conn = mariadb({
   },
 });
 
-/*
+
 export const conn = mariadb({
   config: {
     host: "localhost",
