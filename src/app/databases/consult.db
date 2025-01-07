@@ -21,7 +21,7 @@ INSERT INTO roles(name_rol) VALUES('Usuario')
 
 ALTER TABLE users
 ADD CONSTRAINT FK_UserRol
-FOREIGN KEY (role_id) REFERENCES users(id_rol);
+FOREIGN KEY (id_rol) REFERENCES roles(id_rol);
  
 
 CREATE TABLE `animal` (
