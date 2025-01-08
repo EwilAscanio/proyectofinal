@@ -33,4 +33,15 @@ export const conn = mariadb({
     database: "db_proyecto",
   },
 });
+
+
+export const conn = mariadb({
+  config: {
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    port: process.env.MYSQLPORT,
+    database: process.env.MYSQLDATABASE,
+  },
+});
 */
