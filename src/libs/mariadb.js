@@ -3,11 +3,11 @@ import mariadb from "serverless-mysql";
 // Creacion de los parametros de conexion con la base de Databas.
 export const conn = mariadb({
   config: {
-    host: process.env.MYSQLHOST,
-    user: process.env.MYSQLUSER,
-    password: process.env.MYSQLPASSWORD,
-    port: process.env.MYSQLPORT,
-    database: process.env.MYSQLDATABASE,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
   },
 });
 
@@ -23,6 +23,15 @@ export const conn = mariadb({
   },
 });
 
+export const conn = mariadb({
+  config: {
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    port: process.env.MYSQLPORT,
+    database: process.env.MYSQLDATABASE,
+  },
+});
 
 export const conn = mariadb({
   config: {
