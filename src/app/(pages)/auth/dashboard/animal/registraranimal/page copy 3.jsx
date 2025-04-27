@@ -4,17 +4,18 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import {
-  LuHash,
-  LuBrush,
-  LuUsers,
-  LuGitBranch,
-  LuVenetianMask,
-  LuScanLine,
-  LuScale,
-  LuTag,
-  LuHourglass,
-  LuActivity,
-  LuDollarSign,
+  // Nuevos iconos sugeridos (importa los que necesites):
+  LuHash, // Para Código Animal
+  LuBrush, // Para Nombre Animal
+  LuUsers, // Para Grupo / Sexo (o usa LuVenetianMask para sexo)
+  LuGitBranch, // Para Familia
+  LuVenetianMask, // Alternativa para Sexo (íconos masculino/femenino)
+  LuScanLine, // Para Chip
+  LuScale, // Para Peso
+  LuTag, // Para Arete
+  LuHourglass, // Para Tiempo Gestación
+  LuActivity, // Para Status
+  LuDollarSign, // Para Precio
   LuArrowRight,
   LuCalendar,
 } from "react-icons/lu";
@@ -187,6 +188,7 @@ const Animal = () => {
           </div>
           <form className="space-y-4" onSubmit={onSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {" "}
               {/* Campo numero 1 del Formulario CODIGO ANIMAL */}
               <div className="relative">
                 <LuHash
@@ -409,34 +411,24 @@ const Animal = () => {
                 )}
               </div>
               {/* Campo numero 9 del Formulario FECHA PALPACION (condicional) */}
-              {/* ENVUELTO EN UN DIV PARA EL GRID */}
-              <div>
-                <label htmlFor="fechaPalpacion_ani" className={labelClass}>
-                  Fecha Palpación (Hembra)
-                  {selectedSex === "Hembra" && " *"}{" "}
-                  {/* Indica si es requerido */}
-                </label>
-                <div className="relative">
-                  <LuCalendar // Usar ícono de calendario
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                    size={20}
-                  />
-                  <input
-                    id="fechaPalpacion_ani" // Añadir ID para el label
-                    type="date"
-                    // El placeholder en type="date" no se ve en todos los navegadores, el label es más importante
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
-                    disabled={selectedSex !== "Hembra"} // Deshabilitar si no es hembra
-                    {...register("fechaPalpacion_ani", {
-                      // Requerido solo si es hembra
-                      required:
-                        selectedSex === "Hembra"
-                          ? "La fecha de palpación es requerida para hembras"
-                          : false,
-                    })}
-                  />
-                </div>
-                {/* Mover el span de error DENTRO de este div contenedor */}
+              <div className="relative">
+                <LuCalendar // Usar ícono de calendario
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
+                <input
+                  type="date"
+                  placeholder="Fecha Palpación (Hembra)"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  disabled={selectedSex !== "Hembra"} // Deshabilitar si no es hembra
+                  {...register("fechaPalpacion_ani", {
+                    // Requerido solo si es hembra
+                    required:
+                      selectedSex === "Hembra"
+                        ? "La fecha de palpación es requerida para hembras"
+                        : false,
+                  })}
+                />
                 {errors.fechaPalpacion_ani && (
                   <span className="text-red-600 text-sm mt-1 block">
                     {errors.fechaPalpacion_ani.message}
@@ -444,101 +436,74 @@ const Animal = () => {
                 )}
               </div>
               {/* Campo numero 10 del Formulario TIEMPO DE GESTACION (condicional) */}
-              {/* Este campo no es de fecha, pero lo mantengo envuelto en un div para el grid */}
-              <div>
-                <label htmlFor="tiempodegestacion_ani" className={labelClass}>
-                  Tiempo de Gestacion
-                </label>
-                <div className="relative">
-                  {" "}
-                  {/* Este div ya estaba para el ícono y es el elemento del grid */}
-                  <LuHourglass
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                    size={20}
-                  />
-                  <input
-                    type="text" // Podría ser number si solo esperas números (e.g., días)
-                    placeholder="Gestación (días/meses)"
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
-                    disabled={selectedSex !== "Hembra"}
-                    {...register("tiempoGestacion_ani", {
-                      required:
-                        selectedSex === "Hembra"
-                          ? "El tiempo de gestación es requerido para hembras"
-                          : false,
-                      minLength:
-                        selectedSex === "Hembra"
-                          ? { value: 1, message: "Indique el tiempo" }
-                          : undefined, // Ajusta según necesites
-                    })}
-                  />
-                  {errors.tiempoGestacion_ani && (
-                    <span className="text-red-600 text-sm mt-1 block">
-                      {errors.tiempoGestacion_ani.message}
-                    </span>
-                  )}
-                </div>
+              <div className="relative">
+                <LuHourglass
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
+                <input
+                  type="text" // Podría ser number si solo esperas números (e.g., días)
+                  placeholder="Gestación (días/meses) (Hembra)"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  disabled={selectedSex !== "Hembra"}
+                  {...register("tiempoGestacion_ani", {
+                    required:
+                      selectedSex === "Hembra"
+                        ? "El tiempo de gestación es requerido para hembras"
+                        : false,
+                    minLength:
+                      selectedSex === "Hembra"
+                        ? { value: 1, message: "Indique el tiempo" }
+                        : undefined, // Ajusta según necesites
+                  })}
+                />
+                {errors.tiempoGestacion_ani && (
+                  <span className="text-red-600 text-sm mt-1 block">
+                    {errors.tiempoGestacion_ani.message}
+                  </span>
+                )}
               </div>
               {/* Campo numero 11 del Formulario FECHA NACIMIENTO */}
-              <div>
-                <label htmlFor="fechaNacimiento_ani" className={labelClass}>
-                  Fecha de Nacimiento *
-                </label>
-
-                <FechaNacimientoInput
-                  name="fechaNacimiento_ani" // Asegúrate de que el componente use este name/id
-                  registerProps={register("fechaNacimiento_ani", {
-                    required: "La fecha de nacimiento es requerida",
-                    validate: (value) => {
-                      if (!value) return true; // No validar si está vacío (ya lo cubre required)
-                      const today = new Date();
-                      const parts = value.split("/");
-                      // Asegurarse de que hay 3 partes y son números válidos
-                      if (
-                        parts.length === 3 &&
-                        !isNaN(parts[0]) &&
-                        !isNaN(parts[1]) &&
-                        !isNaN(parts[2])
-                      ) {
-                        const [dd, mm, yyyy] = parts.map(Number);
-                        // Meses en JS son 0-indexados (mm - 1)
-                        const selectedDate = new Date(yyyy, mm - 1, dd);
-                        // Ajustar la hora a 0 para comparar solo fechas
-                        today.setHours(0, 0, 0, 0);
-                        selectedDate.setHours(0, 0, 0, 0);
-                        return (
-                          selectedDate <= today ||
-                          "La fecha de nacimiento no puede ser futura"
-                        );
-                      }
-                      // Si el formato no es el esperado, la validación falla o se asume inválido
-                      return "Formato de fecha inválido"; // O simplemente true si confías en el componente
-                    },
-                  })}
-                  error={errors.fechaNacimiento_ani}
-                />
-              </div>
+              <label htmlFor="fechaNacimiento_ani" className={labelClass}>
+                Fecha de Nacimiento *
+              </label>
+              <FechaNacimientoInput
+                name="fechaNacimiento_ani"
+                label="Fecha de Nacimiento *"
+                registerProps={register("fechaNacimiento_ani", {
+                  required: "La fecha de nacimiento es requerida",
+                  validate: (value) => {
+                    // Validación adicional: no puede ser fecha futura
+                    const today = new Date();
+                    const selectedDate = new Date(value);
+                    // Ajustar la hora a 0 para comparar solo fechas
+                    today.setHours(0, 0, 0, 0);
+                    selectedDate.setHours(0, 0, 0, 0); // Necesario porque el input date puede incluir zona horaria implicitamente
+                    return (
+                      selectedDate <= today ||
+                      "La fecha de nacimiento no puede ser futura"
+                    );
+                  },
+                })}
+                error={errors.fechaNacimiento_ani}
+              />
               {/* Campo numero 12 del Formulario FECHA VACUNACION */}
-              <div>
-                <label htmlFor="fechaVacunacion_ani" className={labelClass}>
-                  Fecha Última Vacunación *
-                </label>
-                <div className="relative">
-                  <LuCalendar
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                    size={20}
-                  />
-                  <input
-                    id="fechaVacunacion_ani" // Añadir ID para el label
-                    type="date" // Usar date
-                    // El placeholder en type="date" no se ve en todos los navegadores
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    {...register("fechaVacunacion_ani", {
-                      required: "La fecha de vacunación es requerida", // O quitar si es opcional
-                    })}
-                  />
-                </div>
-
+              <label htmlFor="fechaVacunacion_ani" className={labelClass}>
+                Fecha Última Vacunación *
+              </label>
+              <div className="relative">
+                <LuCalendar
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
+                <input
+                  type="date" // Usar date
+                  placeholder="Fecha Última Vacunación *" // Indicar si es requerida
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  {...register("fechaVacunacion_ani", {
+                    required: "La fecha de vacunación es requerida", // O quitar si es opcional
+                  })}
+                />
                 {errors.fechaVacunacion_ani && (
                   <span className="text-red-600 text-sm mt-1 block">
                     {errors.fechaVacunacion_ani.message}
@@ -546,33 +511,27 @@ const Animal = () => {
                 )}
               </div>
               {/* Campo numero 13 del Formulario STATUS ANIMAL */}
-              <div>
-                <label htmlFor="status_ani" className={labelClass}>
-                  Status del Animal *
-                </label>
-                <div className="relative">
-                  <select
-                    id="status_ani" // Añadir ID para el label
-                    className={`w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none text-gray-700`} // Siempre texto oscuro aquí
-                    {...register("status_ani", {
-                      required: "El status es requerido",
-                    })}
-                    defaultValue="1" // Establecer valor predeterminado
-                  >
-                    {/* Quitamos la opción vacía si hay default */}
-                    <option value="1">Activo</option>
-                    <option value="2">Inactivo</option>
-                  </select>
-                  <LuActivity
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                    size={20}
-                  />
-                  <LuArrowRight
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 rotate-90 text-gray-400 pointer-events-none"
-                    size={20}
-                  />
-                </div>
-
+              <div className="relative">
+                <select
+                  className={`w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none text-gray-700`} // Siempre texto oscuro aquí
+                  {...register("status_ani", {
+                    required: "El status es requerido",
+                  })}
+                  defaultValue="1" // Establecer valor predeterminado
+                >
+                  {/* <option value="">Status del Animal *</option> */}{" "}
+                  {/* Quitamos la opción vacía si hay default */}
+                  <option value="1">Activo</option>
+                  <option value="2">Inactivo</option>
+                </select>
+                <LuActivity
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
+                <LuArrowRight
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 rotate-90 text-gray-400 pointer-events-none"
+                  size={20}
+                />
                 {errors.status_ani && (
                   <span className="text-red-600 text-sm mt-1 block">
                     {errors.status_ani.message}
@@ -580,31 +539,24 @@ const Animal = () => {
                 )}
               </div>
               {/* Campo numero 14 del Formulario PRECIO ANIMAL*/}
-              <div>
-                <label htmlFor="precio_ani" className={labelClass}>
-                  Precio (Opcional)
-                </label>
-                <div className="relative">
-                  <LuDollarSign
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                    size={20}
-                  />
-                  <input
-                    id="precio_ani"
-                    type="number"
-                    step="0.01" // Para precios con centavos
-                    placeholder="1000"
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    {...register("precio_ani", {
-                      valueAsNumber: true,
-                      min: {
-                        value: 0,
-                        message: "El precio no puede ser negativo",
-                      },
-                    })}
-                  />
-                </div>
-                {/* Mover el span de error DENTRO de este div contenedor */}
+              <div className="relative">
+                <LuDollarSign
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
+                <input
+                  type="number"
+                  step="0.01" // Para precios con centavos
+                  placeholder="Precio (Opcional)"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  {...register("precio_ani", {
+                    valueAsNumber: true,
+                    min: {
+                      value: 0,
+                      message: "El precio no puede ser negativo",
+                    },
+                  })}
+                />
                 {errors.precio_ani && (
                   <span className="text-red-600 text-sm mt-1 block">
                     {errors.precio_ani.message}

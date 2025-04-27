@@ -490,6 +490,9 @@ const Animal = () => {
                   registerProps={register("fechaNacimiento_ani", {
                     required: "La fecha de nacimiento es requerida",
                     validate: (value) => {
+                      // Validación adicional: no puede ser fecha futura
+                      // Ajustar la validación si FechaNacimientoInput devuelve un formato diferente a YYYY-MM-DD
+                      // Si devuelve DD/MM/YYYY:
                       if (!value) return true; // No validar si está vacío (ya lo cubre required)
                       const today = new Date();
                       const parts = value.split("/");
@@ -517,6 +520,12 @@ const Animal = () => {
                   })}
                   error={errors.fechaNacimiento_ani}
                 />
+
+                {errors.fechaNacimiento_ani && (
+                  <span className="text-red-600 text-sm mt-1 block">
+                    {errors.fechaNacimiento_ani.message}
+                  </span>
+                )}
               </div>
               {/* Campo numero 12 del Formulario FECHA VACUNACION */}
               <div>

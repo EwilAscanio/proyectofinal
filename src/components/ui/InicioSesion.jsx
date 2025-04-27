@@ -12,7 +12,7 @@ import Image from "next/image";
 import FondoLogin from "@/images/ImagenSesion.jpeg";
 import Logo from "@/images/Logo.png";
 
-const MergedLoginForm = () => {
+const InicioSesion = () => {
   // Estado para mostrar/ocultar la contraseña
   const [showPassword, setShowPassword] = useState(false);
   // Estado para manejar errores generales de autenticación
@@ -123,7 +123,7 @@ const MergedLoginForm = () => {
                     name="login_usr"
                     type="text"
                     className={`appearance-none block w-full pl-10 pr-3 py-2 border ${
-                      errors.login_usr ? "border-red-500" : "border-gray-300" // Borde rojo si hay error (del segundo código)
+                      errors.login_usr ? "border-red-500" : "border-gray-300" // Borde rojo si hay error
                     } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                     placeholder="Ingrese su usuario o login"
                     {...register("login_usr", {
@@ -162,12 +162,12 @@ const MergedLoginForm = () => {
                     size={20}
                   />
                   <input
-                    id="password_usr" // ID para la etiqueta label
+                    id="password_usr"
                     name="password_usr"
                     type={showPassword ? "text" : "password"} //
                     className={`appearance-none block w-full pl-10 pr-10 py-2 border ${
                       // Añadimos padding izquierdo y derecho para iconos
-                      errors.password_usr ? "border-red-500" : "border-gray-300" // Borde rojo si hay error (del segundo código)
+                      errors.password_usr ? "border-red-500" : "border-gray-300" // Borde rojo si hay error
                     } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                     placeholder="Ingrese su contraseña"
                     {...register("password_usr", {
@@ -182,7 +182,7 @@ const MergedLoginForm = () => {
                       },
                     })}
                   />
-                  {/* Botón para mostrar/ocultar contraseña (del segundo código) */}
+                  {/* Botón para mostrar/ocultar contraseña */}
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
@@ -194,11 +194,11 @@ const MergedLoginForm = () => {
                       <FaEye className="h-5 w-5 text-gray-400" />
                     )}
                   </button>
-                  {/* Mostrar error si existe (del segundo código, adaptado a RHF) */}
+                  {/* Mostrar error si existe  */}
                   {errors.password_usr && (
                     <div className="flex items-center mt-1 text-red-500 text-sm">
-                      <FaExclamationCircle className="mr-1" />{" "}
-                      {/* Icono de error (del segundo código) */}
+                      <FaExclamationCircle className="mr-1" />
+
                       <span>{errors.password_usr.message}</span>
                     </div>
                   )}
@@ -209,38 +209,16 @@ const MergedLoginForm = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full flex justify-center mt-6 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed" // Clases del segundo código, adaptado el margen superior
+                  className="w-full flex justify-center mt-16 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed" // Clases del segundo código, adaptado el margen superior
                   disabled={isSubmitting || !watchLogin || !watchPassword} // Deshabilitar mientras se envía O si los campos están vacíos
                 >
-                  {isSubmitting ? "Iniciando Sesión..." : "Iniciar Sesión"}{" "}
+                  {isSubmitting ? "Iniciando Sesión..." : "Iniciar Sesión"}
                   {/* Texto del botón con estado de carga */}
-                  {!isSubmitting && (
-                    <LuArrowRight className="ml-2" size={20} />
-                  )}{" "}
+                  {!isSubmitting && <LuArrowRight className="ml-2" size={20} />}
                   {/* Icono solo si no está cargando */}
                 </button>
               </div>
             </form>
-
-            {/* Enlaces de "Olvidó Contraseña" y "Crear Cuenta" (del primer código) */}
-            <div className="mt-6 flex justify-between items-center text-sm">
-              <Link href="#" className="text-blue-600 hover:underline">
-                Olvido de Contraseña?
-              </Link>
-              <Link
-                href="/register" // Asegúrate de que esta ruta sea correcta
-                className="text-blue-600 hover:underline"
-              >
-                Crear Cuenta
-              </Link>
-            </div>
-
-            {/* Mostrar error general si existe (de SweetAlert2, opcional si quieres mostrarlo también aquí) */}
-            {/* {error && (
-                <div className="mt-4 text-center text-red-600 text-sm">
-                    {error}
-                </div>
-            )} */}
           </div>
         </div>
       </div>
@@ -248,4 +226,4 @@ const MergedLoginForm = () => {
   );
 };
 
-export default MergedLoginForm;
+export default InicioSesion;

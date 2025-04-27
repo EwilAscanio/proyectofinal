@@ -1,9 +1,11 @@
 import HomePage from "@/components/HomePage";
+import InicioSesion from "@/components/ui/InicioSesion";
 
 const page = () => {
   return (
     <div>
-      <HomePage />
+      {/* <HomePage /> */}
+      <InicioSesion />
     </div>
   );
 };
